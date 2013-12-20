@@ -1,0 +1,18 @@
+版本控制建議
+1.主要分支
+	master 主程式(除非重大 bug，則會分出 hotfix 分支)
+	develop 開發分支(用來在另外分支出 Release, feature)
+2.次要分支
+	Hotfixes(由 master 直接分支，馬上修正 bug)
+	Feature(由 develop 直接分支，開發新功能)
+	Release(由 develop 直接分支，開發下一版 Release)
+	
+
+理由：
+目前或許不需要到這麼複雜，但有利於以後的開發。
+像是我們目前做的string_level1就可以放在feature底下做開發。
+而且這樣的作法，也比較可以保障版本不會被改亂。
+
+來源：
+http://blog.wu-boy.com/2011/03/git-%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6-branch-model-%E5%88%86%E6%94%AF%E6%A8%A1%E7%B5%84%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9/
+完全取自此網頁的IDEA，有圖解。

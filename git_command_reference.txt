@@ -1,0 +1,61 @@
+Git 指令參考
+1.git config
+	git config --global user.name "<Your name>"
+	git config --global user.email "<Your email>"
+		這個指令會設定Git的設定值。
+		第一次安裝完成之後，請務必設定自己的名字與信箱。
+		因為Git是利用名字與信箱來分辨貢獻者。
+2.git clone <url>
+		這會指令會將url所指定的倉庫複製到目前目錄。
+3.git add <filename>
+		這個指令會將filename所指定的檔案加入到倉庫追蹤當中。
+		如果檔案沒有先加入倉庫追蹤的話，Git是不會對該檔案進行版本管理。
+4.git commit
+		這個指令會將有追蹤並且修改過的內容提交。
+		提交時Git會要求必須輸入修改的內容。
+		提交之後會有一個唯一識別號，可以透過這個識別號去查看之前的修改與說明。
+5.git pull <origin> <master>
+		這個指令會將遠端的倉庫與本地的倉庫同步並合併。
+		（如果不是使用clone的話，需要先透過git remote add <url>先設定）
+		如果有衝突的話Git會要求解決衝突之後再commit。
+6git status
+		檢視狀態，有任何不確定可隨時確認。
+7.git log
+		檢視commit的歷史紀錄，一次只會顯示一條branch上的commit紀錄。
+8.git remote add <origin> <url>
+	git push -u <origin> <master>
+	-u tells Git to remember the parameter, so that next time we can 
+	simply run "git push".
+9.git diff
+		顯示commit之間的不同處。相關參數可以參考git_real_slides.pdf
+10.git blame <filename> --date short
+		追蹤一個檔案的修改紀錄
+11.git reset HEAD <file.path>
+		將之前add進stage的檔案，重新拿出STAGE。
+12.git checkout -- <filename>
+		將檔案回復到最後一次commit後的版本。
+		#注意！這之前的執行動作會全部消失。
+13.branch 系列
+		git branch <branch.name>
+			創造一個<branchname>分支。
+		git branch
+			顯示現在有哪些分之。
+		git checkout <branch.name>
+			移動到<branch.name>這個分支。
+		git branch -d <branch.name>
+			刪除<branch.name>此分支。
+		git merge --no-ff <branch.name>
+			將<branch.name>此分支合併到當下所在的分支。
+			--no-ff參數會清楚記錄之前的分支操作步驟，較優。
+		
+參考資料：
+1.http://blog.wu-boy.com/tag/git/
+中文，簡單易懂，詳盡。
+2.https://github.com/FreedomKnight/TagExpert/blob/master/doc/GitTutorial.md
+中文，簡單易懂，執行git最基本的流程。
+3.http://ncu-csie-snmg.github.io/2013-NCU-CSIE-Website-Design-Competition/git.html
+中文，此篇的主要參考資料。
+4.http://courseware.codeschool.com.s3.amazonaws.com/git_real_slides.pdf
+簡報PDF，英文，有很多指令的參數可以從這找。
+
+		
