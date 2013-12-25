@@ -8,7 +8,7 @@ os.system('python3.3 /home/coding/FL/del.py')
 abpath='/home/coding/FL'
 file_name=sys.argv[1]
 file_ID=int(sys.argv[2]) #problemID
-timelimit=5
+timelimit=sys.argv[3]
 testround=6
 totalline = 0
 D=1
@@ -40,7 +40,7 @@ problemlist=[]
 
 name=os.path.splitext(file_name)
 #path=os.getcwd()
-os.system('mkdir %s/ufiles'%abpath)
+#os.system('mkdir %s/ufiles'%abpath)
 os.system('chmod 1777 %s/ufiles'%abpath)
 os.chdir(abpath+'/ufiles')
 os.system('mkdir %s'%name[0])
