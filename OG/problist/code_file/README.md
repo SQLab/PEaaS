@@ -1,4 +1,4 @@
-    Here will put problems directory .
+    Here will put problem AC codes directory .
     For example
     
     + code_file
