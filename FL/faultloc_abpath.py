@@ -8,7 +8,7 @@ os.system('python3.3 /home/coding/FL/del.py')
 abpath='/home/coding/FL'
 file_name=sys.argv[1]
 file_ID=int(sys.argv[2]) #problemID
-timelimit=sys.argv[3]
+timelimit=int(sys.argv[3])
 testround=6
 totalline = 0
 D=1
