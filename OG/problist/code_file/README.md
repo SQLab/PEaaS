@@ -1,4 +1,3 @@
-
     Here will put problems directory .
     For example
     
@@ -10,7 +9,6 @@
      | + 1040X
         |
         |--- 1040X AC code files are here
-     .
      .
      .
      .
