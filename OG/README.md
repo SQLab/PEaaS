@@ -11,7 +11,10 @@
     First. # autocompiler
     1. put 某題號 AC codes in problist/code_file/某題號/
     2. cd to the same path where you put files in.
-    3. type "python3.3 autocompiler.py 'pid'".  # 'pid' will be replace by 題號(1040X...)
+    3. type "python3.3 autocompiler.py 'pid' 'path' 'cpath'".  
+      # 'pid' will be replace by 題號(1040X...)
+      # 'path' 代表code的位置
+      # 'cpath' 代表compile "program 放的位置"
 
     Second. # output generate
     1. put all files/dir in the same path.
