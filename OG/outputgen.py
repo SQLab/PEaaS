@@ -1,3 +1,4 @@
+#!/usr/local/bin/python3.3
 import subprocess,os,sys,stat
 from globalvar import *
 from multiprocessing import Pool, Manager
@@ -60,7 +61,7 @@ def multiproc(e,idata,pid,ofile,rm):
     ename , eext = os.path.splitext(e)
 ############################### process on ################################
     if eext == ".exe":
-        p = subprocess.Popen(e, stdin = subprocess.PIPE,stdout = subprocess.PIPE, stderr = subprocess.PIPE, shell = True)
+        p = subprocess.Popen('/usr/bin/sudo /bin/su penobody -c '+e, stdin = subprocess.PIPE,stdout = subprocess.PIPE, stderr = subprocess.PIPE, shell = True)
     else:
         javafile = open(shellpath+"exejava_"+e+".sh","w")
         javafile.write(cmdproglue)
