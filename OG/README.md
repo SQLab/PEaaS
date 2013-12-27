@@ -1,4 +1,4 @@
-OG
+OG -- a tool to generate test output automatically.
 =====
     autocompiler.py is compile AC codes automatically.
     outputgen.py is generate outputs.
