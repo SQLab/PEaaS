@@ -39,6 +39,7 @@ class VarInt:
 		elif self.__base == 16:
 			pass
 	def gen_val(self, level):
+		level = int(level)
 		if self.__min < self.__max:
 			self.__width = self.__max - self.__min
 			self.__limit_max = int(0 + self.__width ** (level/3))
