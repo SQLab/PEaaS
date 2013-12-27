@@ -40,23 +40,17 @@ class VarInt:
 			pass
 	def gen_val(self, level):
 		if self.__min < self.__max:
-			if self._gen_count < 10:
-				self.__width = self.__max - self.__min
-				self.__limit_max = int(0 + self.__width ** (level/3))
-				if self.__limit_max > self.__max:
-					self.__limit_max = self.__max
-				self.__limit_min = int(0 - self.__width ** (level/3))
-				if self.__limit_min < self.__min:
-					self.__limit_min = self.__min
-				self.__val = random.randint(self.__limit_min, self.__limit_max)
-				self._gen_count = self._gen_count + 1
-				return True
-			else:
-				self.reset()
+			self.__width = self.__max - self.__min
+			self.__limit_max = int(0 + self.__width ** (level/3))
+			if self.__limit_max > self.__max:
+				self.__limit_max = self.__max
+			self.__limit_min = int(0 - self.__width ** (level/3))
+			if self.__limit_min < self.__min:
+				self.__limit_min = self.__min
+			self.__val = random.randint(self.__limit_min, self.__limit_max)
+			return True
 		else:
 			return False
-	def reset(self):
-		self._gen_count = 0
 	def prime(self):  #generate a prime number value
 		pass
 
