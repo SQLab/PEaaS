@@ -1,0 +1,145 @@
+h2 {
+line-height:0px;
+color: black;
+font-family: sans-serif;
+display: block;
+font-size: 1.5em;
+-webkit-margin-before: 0.83em;
+-webkit-margin-after: 0.83em;
+-webkit-margin-start: 0px;
+-webkit-margin-end: 0px;
+font-weight: bold;
+}
+.error {
+width:450px;
+color: red;
+font-size:150%;
+font-family: monospace;
+border: 1px dotted red;
+overflow:hidden;
+}
+fieldset {
+display: block;
+-webkit-margin-start: 2px;
+-webkit-margin-end: 2px;
+-webkit-padding-before: 0.35em;
+-webkit-padding-start: 0.75em;
+-webkit-padding-end: 0.75em;
+-webkit-padding-after: 0.625em;
+border: 2px groove threedface;
+border-image-source: initial;
+border-image-slice: initial;
+border-image-width: initial;
+border-image-outset: initial;
+border-image-repeat: initial;
+min-width: -webkit-min-content;
+}
+.content {
+border: 1px solid #fff;
+padding: 5px;
+margin-bottom: 20px;
+background: #acb8db;
+}
+button {font-size:150%; font-weight:"bold";}
+input {font-size:150%; font-weight:"bold";}
+.tr1 {
+    background-color: rgb(203, 210, 231);
+}
+.lightbox {
+    position: absolute;
+    width: 50%;
+    height: 295px;
+    background-image: url("blue_80_transp.png");
+    display: none;
+    text-align: center;
+    font-size: 18px;
+}
+.generator_table {
+    padding: 5px;
+    height: 290px;
+    width: 100%;
+}
+.generator {
+    padding: 0px;
+    margin: 0px;
+}
+textarea.abb{
+    resize : none;
+    width : 100%;
+    height : 195px;
+}
+#wait{
+position:absolute;
+width:300px;
+top:50%;
+left:50%;
+margin-left:-120px;
+text-align:center;
+padding:7px 0 0 0;
+font:bold 20px Arial, Helvetica, sans-serif;
+}
+#presubmit{
+position:absolute;
+width:300px;
+top:20%;
+left:75%;
+margin-left:-120px;
+text-align:center;
+padding:7px 0 0 0;
+font:bold 20px Arial, Helvetica, sans-serif;
+}
+
+/* for fault localization wrong test table*/
+.inputoutput {
+    border: 1px solid black;
+    background-color: rgb(250, 250, 250);
+    padding: 5px 0px 5px 5px;
+    text-align: left;
+}
+table {
+    border-collapse: separate;
+    border-spacing: 2px;
+}
+/* for fault localization code presentation */
+span.header{ text-align:center;font-weight:bold; }
+pre.fl_line{ margin:0;padding:0;width:50px;position:absolute;left:0px;white-space:pre; margin-top:0px; font-size:16px;}
+pre.fl_line span.fl_l { float:right; background-color: #EFE383; }
+pre.fl_pass{ margin:0;padding:0;width:140px;position:absolute;left:50px;white-space:pre; margin-top:0px; font-size:16px;}
+pre.fl_pass span.fl_p { float:right; }
+pre.fl_code{ margin:0;padding:0;position:absolute;left:190px;white-space:pre; margin-top:0px; font-size:16px;}
+pre.fl_code span.fl_c { float:left; }
+/* for fault localization ranking color */
+.sys_lvl{ text-align:center;	color:#000000;   line-height:15px;    font-weight: bold; }
+#sys_lvl_1{ position:absolute;	top:69px;	left:167px; }
+#sys_lvl_2{ position:absolute;	top:69px;	left:205px; }
+#sys_lvl_3{ position:absolute;	top:69px;	left:245px; }
+#sys_lvl_4{ position:absolute;	top:69px;	left:283px; }
+#sys_lvl_5{ position:absolute;	top:69px;	left:322px; }
+#sys_lvl_6{ position:absolute;	top:69px;	left:361px; }
+#sys_lvl_7{ position:absolute;	top:69px;	left:401px; }
+#sys_lvl_8{ position:absolute;	top:69px;	left:440px; }
+#sys_lvl_9{ position:absolute;	top:69px;	left:480px; }
+#sys_lvl_10{position:absolute;	top:69px;	left:519px; }
+#web_status{ position:absolute; }
+/* for fault localization dstar level button */
+ul.ul_menu {
+	margin:0;
+	padding:0;
+	width:720px;
+	height:120px;
+	position:absolute;
+	top:0px;
+	left:0px;
+}
+ul.ul_menu  li {
+	float:left;
+	cursor:pointer;	
+	width:120px;
+	height:60px;
+	overflow: hidden;	
+}
+
+ul.ul_menu li img{
+	width:120px;
+	height:120px;
+}
