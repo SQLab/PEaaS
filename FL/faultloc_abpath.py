@@ -64,7 +64,7 @@ for i in range(1,testround):
         if whilelimit==1000: 
             problemlist.append(pronum)
             break
-    print(problemlist)
+    #print(problemlist)
     if name[1]=='.c':os.system('gcc -fprofile-arcs -ftest-coverage %s %s/mystart.c -o %s\n'%(file_name,abpath,name[0]))
     elif name[1]=='.cpp':os.system('g++ -fprofile-arcs -ftest-coverage %s %s/mystart.cpp -o %s\n'%(file_name,abpath,name[0]))
     elif name[1]=='.java':
@@ -89,27 +89,36 @@ for i in range(1,testround):
         s = p.communicate(input =data.encode('utf-8'),timeout = timelimit)
     except:
         time_out=1
-        print(p.pid)
+        print("hi")
+        print(name)
+        tpid = subprocess.check_output('pgrep -u penobody %s'%name[0][0:10], shell=True)
+        print(tpid)
+        ppid = tpid.decode("utf-8").split('\n')
+        print(ppid)
+        '''f = open('pid.txt', 'a')
+        f.write(ppid+'\n')
+        f.close()'''
         print('user time out')
         #print(s[0])
         wrong_answer.append('t%d'%problemlist[i-1])
         f = open('%d_useroutput%d.txt'%(file_ID,problemlist[i-1]), 'w')
         f.write('user time out')
         f.close()
-        
         #if name[1]=='.c':p.send_signal('SIGUSR1')
         if name[1]=='.c' or name[1]=='.cpp':
-            os.system("/usr/bin/sudo -u penobody  '/bin/kill -s SIGUSR1 %i'" %p.pid)
+            #os.system("/usr/bin/sudo /bin/su penobody -c '/bin/kill -s SIGUSR1 %i'" %p.pid)
+            os.system("/usr/bin/sudo /bin/su penobody -c '/bin/kill -s SIGUSR1 %s'" %ppid[-2])
             #os.system("bash -c 'kill -s SIGUSR1 %i'" %p.pid)
-            #p.kill()
-            os.system('/usr/bin/sudo -u penobody /bin/kill %i' %p.pid)
+            #os.system("/usr/bin/sudo /bin/su penobody -c '/bin/kill %i'" %p.pid)
+            os.system("/usr/bin/sudo /bin/su penobody -c '/bin/kill %s'" %ppid[-2])
             #os.system('kill %i' %p.pid)
             p.terminate()
             p.kill()
-            if p.returncode !='' :
+            '''if p.returncode !='' :
                 f = open(abpath+'/unkill/%s.txt'%name[0], 'w')
                 f.write('program pid %d not kill'%p.pid)
-                f.close()
+                #f.write('program pid %s not kill'%pid.decode("utf-8"))
+                f.close()'''
         else:
             continue
     #驗證結果(correct/wrong)
@@ -173,9 +182,9 @@ i=0
 for i in range(0,totalline):
     if Ncf[i]==0: continue
     elif (Ncs[i]+Nuf[i] == 0): 
-        result[i]=4294967296
-        resultt[i]=4294967296
-        resulttt[i]=4294967296
+        result[i]=Ncf[i]
+        resultt[i]=Ncf[i]
+        resulttt[i]=Ncf[i]
     else : 
         result[i] = round((Ncf[i])*D/(Ncs[i]+Nuf[i]),3)
         resultt[i] = round((Ncf[i])*(Ncf[i])/(Ncs[i]+Nuf[i]),3)
