@@ -55,8 +55,43 @@ class VarInt:
 	def prime(self):  #generate a prime number value
 		pass
 
+class VarIntList:
+	def __init__(self):
+		self.__ints = None
+		self.__ranges = list()
+		self.__length = 0
+		self.__delimiter = ' '
+		self._type = 'intlist'  #read_only
+	def range(self, min, max):
+		count = self.__length
+		while count > 0:
+			self.__ranges.append((min, max))
+			count -= 1
+	def each_range(self):
+		pass
+	def set_del(self, s):
+		self.__delimiter = s
+	def set_len(self, len):
+		if len > 0:
+			self.__length = len
+	def gen_ints(self):
+		if len(self.__ranges) > 0:
+			self.__ints = list()
+			for pair in self.__ranges:
+				self.__ints.append(random.randint(pair[0], pair[1]))
+			return True
+		else:
+			return False
+	def get_ints(self):
+		new_ints = list()
+		for i in self.__ints:
+			new_ints.append(i)
+			new_ints.append(self.__delimiter)
+		del new_ints[-1]
+		return new_ints
+
 class RelStmt:  #this class handles relation statements
-	def _init_(self):
+	def __init__(self):
 		self.l_operand = None #left object number
 		self.r_operand = None #right object number
 		self.operator = None  #operator type

@@ -3,7 +3,7 @@
 
 import io, random, re, sys
 from obj_types import *
-
+from randomstring import *
 
 def check_rel(l_op, r_op, op_type):  #to check if the comparing relation is established
 	if op_type == '<':
@@ -105,9 +105,12 @@ while itext != '':
 				part_num = 3
 				ipos = ipos + 1
 			
-			re_result = re.match('%dl', itext[ipos:])  #integer list case(not finish)
+			re_result = re.match('%dl', itext[ipos:])  #integer list case
 			if not been_match and re_result:
 				been_match = True
+				orecord.append(VarIntList())
+				obj_record.append(orecord[-1])
+				type_record.append(orecord[-1]._type)
 				ipos = ipos + 3
 			
 			re_result = re.match('%fl', itext[ipos:])  #float list case(not finish)
@@ -119,6 +122,22 @@ while itext != '':
 			if not been_match and re_result:
 				been_match = True
 				orecord.append(VarInt())
+				obj_record.append(orecord[-1])
+				type_record.append(orecord[-1]._type)
+				ipos = ipos + 2
+			
+			re_result = re.match('%z' , itext[ipos:])	#string A-Z a-z
+			if not been_match and re_result:
+				been_match = True
+				orecord.append(VarStringDigit())
+				obj_record.append(orecord[-1])
+				type_record.append(orecord[-1]._type)
+				ipos =ipos + 2			
+			
+			re_result = re.match('%s' , itext[ipos:])	#string A-Z a-z 0-9
+			if not been_match and re_result:
+				been_match = True
+				orecord.append(VarString())
 				obj_record.append(orecord[-1])
 				type_record.append(orecord[-1]._type)
 				ipos = ipos + 2
@@ -305,9 +324,52 @@ while itext != '':
 				obj_index = int(re_result.group(1)) - 1
 				para1 = int(re_result.group(2))
 				para2 = int(re_result.group(3))
-				obj_record[obj_index].set_min(para1)
-				obj_record[obj_index].set_max(para2)
+				if obj_record[obj_index]._type == 'int':
+					obj_record[obj_index].set_min(para1)
+					obj_record[obj_index].set_max(para2)
+				elif obj_record[obj_index]._type == 'intlist':
+					obj_record[obj_index].range(para1, para2)
 				ipos = ipos + len(re_result.group(0))
+			
+			#case of method 'set_del'
+			re_result = re.match('\$([0-9]+)\.set_del\([ ]*("[^"\n]*")[ ]*\);', itext[ipos:])
+			if not been_match and re_result:
+				been_match = True
+				ipos = ipos + len(re_result.group(0))
+				obj_index = int(re_result.group(1)) - 1
+				re_str = re_result.group(2)
+				re_str = re_str[1:len(re_str)-1]
+				re_pos, para1 = 0, ''
+				while re_pos < len(re_str):
+					re_result = re.match(r'\\n', re_str[re_pos:])
+					if re_result:
+						para1 += '\n'
+						re_pos = re_pos + 2
+					
+					re_result = re.match(r'\\t', re_str[re_pos:])
+					if re_result:
+						para1 += '\t'
+						re_pos = re_pos + 2
+					
+					re_result = re.match('[ ]+', re_str[re_pos:])
+					if re_result:
+						para1 += re_result.group(0)
+						re_pos = re_pos + len(re_result.group(0))
+					
+					re_result = re.match('[^\\\\]+', re_str[re_pos:])
+					if re_result:
+						para1 += re_result.group(0)
+						re_pos = re_pos + len(re_result.group(0))
+				obj_record[obj_index].set_del(para1)
+				
+			#case of method 'set_len'
+			re_result = re.match('\$([0-9]+)\.set_len\([ ]*([0-9]+)[ ]*\);', itext[ipos:])
+			if not been_match and re_result:
+				been_match = True
+				obj_index = int(re_result.group(1)) - 1
+				para1 = int(re_result.group(2))
+				obj_record[obj_index].set_len(para1)
+				ipos += len(re_result.group(0))
 			
 			re_result = re.match('\s+', itext[ipos:])
 			if not been_match and re_result:
@@ -316,7 +378,7 @@ while itext != '':
 		elif part_num == 4:  #handle the 'end-format' section
 			re_result = re.match('"[^"\n]*"', itext[ipos:])  #end-string case
 			if not been_match and re_result:
-				if has_end_str:  #There were more one end-strings.
+				if has_end_str:  #There were one more end-strings.
 					lexical_error = True
 					break
 				else:
@@ -363,7 +425,7 @@ while itext != '':
 #--analysis stage end--
 
 if lexical_error:
-	print('There was lexical error!')
+	print('There was lexical error!', ipos)
 else:
 #--output stage--
 	while input_num > 0:
@@ -374,6 +436,8 @@ else:
 			for obj in obj_record:
 				if obj._type == 'int':
 					obj.gen_val(level_num)
+				elif obj._type == 'intlist':
+					obj.gen_ints()
 			for rel in rel_record:
 				if check_rel(obj_record[rel.l_operand - 1].get_val(), obj_record[rel.r_operand - 1].get_val(), rel.operator):
 					continue
@@ -386,6 +450,13 @@ else:
 		while index < len(orecord):
 			if type_record[index] == 'int':
 				ofile.write(str(orecord[index].get_val()))
+			elif type_record[index] == 'intlist':
+				for element in orecord[index].get_ints():
+					ofile.write(str(element))
+			elif type_record[index] == 'string':
+				ofile.write(orecord[index].get_str())
+			elif type_record[index] == 'stringdigit':
+				ofile.write(orecord[index].get_str())
 			else:
 				ofile.write(orecord[index])
 			index = index + 1
